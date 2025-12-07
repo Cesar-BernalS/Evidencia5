@@ -15,6 +15,7 @@ Este archivo tiene como objetivo leer un archivo de bitácora, contar los acceso
 using namespace std;
 
 // Función para extraer la IP de una línea de la bitácora
+// Complejidad: O(1)
 string extraerIP(string linea){
     string w1, s2, s3, ipPort;
     stringstream ss(linea);
