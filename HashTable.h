@@ -1,3 +1,12 @@
+/* María Fernanda García Bushbeck A01199490
+César Tadeo Bernal Sauceda A00841810
+Regina Aguilar García A00841923
+
+Fecha: 6/12/2025
+
+Este archivo tiene como objetivo implementar una tabla hash para almacenar, buscar y eliminar elementos basados en claves de tipo string.
+*/
+
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
@@ -32,6 +41,8 @@ class HashTable{
         ~HashTable();
 };
 
+// Constructor: Inicializa la tabla hash y el tamaño actual
+// Complejidad: O(n)
 template <class T>
 HashTable<T>::HashTable(){
     currSize = 0;
@@ -41,6 +52,8 @@ HashTable<T>::HashTable(){
     }
 }
 
+// Inserta un nuevo elemento en la tabla hash
+// Complejidad: O(1) en promedio, O(n) en el peor caso
 template <class T>
 bool HashTable<T>::insert(string nameKey, T value){
     int collisionCounter = 0;
@@ -48,7 +61,7 @@ bool HashTable<T>::insert(string nameKey, T value){
     int idx = intKey % MAXSIZE;
     int firstDeleted = -1;
     while (true) {
-        if (table[idx]->status == 0) {
+        if (table[idx]->status == 0) { // Vacía
             if (firstDeleted != -1) idx = firstDeleted;
             table[idx]->data = value;
             table[idx]->strKey = nameKey;
@@ -57,24 +70,25 @@ bool HashTable<T>::insert(string nameKey, T value){
             currSize++;
             return true;
         }
-        if (table[idx]->status == 2) {
+        if (table[idx]->status == 2) { // Borrada
             if (firstDeleted == -1)
                 firstDeleted = idx;
         }
-        if (table[idx]->status == 1 && table[idx]->strKey == nameKey) {
+        if (table[idx]->status == 1 && table[idx]->strKey == nameKey) { // Actualizar valor existente
             table[idx]->data = value;
             return true;
         }
         collisionCounter++;
         idx = (intKey + collisionCounter) % MAXSIZE;
-        if (collisionCounter >= MAXSIZE) {
+        if (collisionCounter >= MAXSIZE) { // Tabla llena
             cout << "Full table" << endl;
             return false;
         }
     }
 }
 
-
+// Busca un elemento en la tabla hash
+// Complejidad: O(1) en promedio, O(n) en el peor caso
 template <class T>
 T HashTable<T>::search(string nameKey){
     int collisionCounter = 0;
@@ -95,6 +109,8 @@ T HashTable<T>::search(string nameKey){
     }
 }
 
+// Elimina un elemento de la tabla hash
+// Complejidad: O(1) en promedio, O(n) en el peor caso
 template <class T>
 bool HashTable<T>::remove(string nameKey){
     int collisionCounter = 0;
@@ -117,6 +133,8 @@ bool HashTable<T>::remove(string nameKey){
     }
 }
 
+// Imprime el contenido de la tabla hash
+// Complejidad: O(n)
 template <class T>
 void HashTable<T>::print() {
     for(int i = 0; i < MAXSIZE; i++){
@@ -129,7 +147,8 @@ void HashTable<T>::print() {
     cout << endl;
 }
 
-
+// Destructor: Libera la memoria asignada a la tabla hash
+// Complejidad: O(n)
 template <class T>
 HashTable<T>::~HashTable(){
     for(int i = 0; i < MAXSIZE; i++){

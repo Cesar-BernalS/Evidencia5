@@ -1,3 +1,12 @@
+/* María Fernanda García Bushbeck A01199490
+César Tadeo Bernal Sauceda A00841810
+Regina Aguilar García A00841923
+
+Fecha: 6/12/2025
+
+Este archivo tiene como objetivo definir la estructura de un elemento que se almacenará en la tabla hash.
+*/
+
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
@@ -17,6 +26,8 @@ class Element{
         Element<T>();
 };
 
+// Constructor: Inicializa un elemento con valores por defecto
+// Complejidad: O(1)
 template <class T>
 Element<T>::Element(){
     strKey = "";

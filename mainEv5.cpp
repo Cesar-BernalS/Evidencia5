@@ -1,3 +1,12 @@
+/* María Fernanda García Bushbeck A01199490
+César Tadeo Bernal Sauceda A00841810
+Regina Aguilar García A00841923
+
+Fecha: 6/12/2025
+
+Este archivo tiene como objetivo leer un archivo de bitácora, contar los accesos por IP y permitir consultas interactivas.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -5,6 +14,7 @@
 
 using namespace std;
 
+// Función para extraer la IP de una línea de la bitácora
 string extraerIP(string linea){
     string w1, s2, s3, ipPort;
     stringstream ss(linea);
@@ -15,6 +25,7 @@ string extraerIP(string linea){
     return ipPort.substr(0, pos);
 }
 
+// Función principal
 int main(){
     HashTable<int> ht;
 
@@ -38,7 +49,7 @@ int main(){
     
     cout << "Conteo de accesos por IP:" << endl;
     string consulta;
-    while(true){
+    while(true){ // Bucle de consulta interactiva
         cout << "Ingrese una IP para consultar (o 'salir' para terminar): ";
         cin >> consulta;
         if(consulta == "salir") break;
